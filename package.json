@@ -1,0 +1,20 @@
+{
+  "name": "freshprints_editor",
+  "version": "1.0.0",
+  "description": "An SPA that is a client side editor to perform simple image editings",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "editor"
+  ],
+  "author": "Neetish Raj",
+  "license": "ISC",
+  "dependencies": {
+    "angular": "^1.7.2",
+    "express": "^4.16.3",
+    "mysql2": "^1.6.1",
+    "sequelize": "^4.38.0"
+  }
+}
