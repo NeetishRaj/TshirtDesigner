@@ -11,7 +11,7 @@ const user = require('./routes/user.js');
 
 // App initialization
 const app = express();
-const port = process.env.PORT || 3000;
+const port = process.env.PORT || 8080;
 
 app.use("/public", express.static("public"));
 app.use("/user", user);
@@ -20,8 +20,14 @@ app.listen(port, () => {
   console.log("Listening on port " + port);
 });
 
+/*
+ * Uri string based connection is deprecated in Sequelize for security reasons
+ * const sequelize =
+ * new Sequelize('mysql://morpheus:godOfDreams@localhost:3306/tshirtDesign');
+ * therefore using symbol based connections as shown below.
+ */
 
-const sequelize = new Sequelize('morph', 'root', 'morpheus', {
+const sequelize = new Sequelize('tshirtDesign', 'morpheus', 'godOfDreams', {
   "dialect": 'mysql',
   "host": 'localhost',
   "operatorsAliases": false,
@@ -32,7 +38,6 @@ const sequelize = new Sequelize('morph', 'root', 'morpheus', {
     "min": 0
   }
 });
-
 
 
 

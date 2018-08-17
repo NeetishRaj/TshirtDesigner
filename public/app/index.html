@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" ng-app="designEditor" >
+<html lang="en" ng-app="designEditorApp" >
   <head>
     <meta charset="utf-8">
     <title>T-Shirt Design Editor</title>
@@ -9,34 +9,28 @@
     <meta name="copyright" content="2018, Neetish Raj">
     <meta name="keywords" content="Tshirt design editor">
     <meta name="description" content="A Simple design editor for performing light editing of images with persistance storage, will be used by editors">
+    <link rel="stylesheet" href="app.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/fabric.js/1.7.22/fabric.min.js" charset="utf-8"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.7.2/angular.min.js" charset="utf-8"></script>
     <script src="https://code.angularjs.org/1.7.2/angular-route.min.js" charset="utf-8"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/fabric.js/1.7.22/fabric.min.js" charset="utf-8"></script>
     <script src="app.js" charset="utf-8"></script>
+    <script src="modules/editor/controller.js" charset="utf-8"></script>
+    <script src="script/util-module.js" charset="utf-8"></script>
+    <script src="script/editor-module.js" charset="utf-8"></script>
+    <script src="script/img-module.js" charset="utf-8"></script>
+    <script src="script/editor.js" charset="utf-8"></script>
+
   </head>
-  <body>
-    <div class="" ng-controller="designEditorController">
-      <p>{{name}}</p>
-    </div>
-    <canvas id="c" width="300" height="300"></canvas>
-    <h1>HI Motherfuckers</h1>
-    <input type="text" name="name" ng-model="myName" value="">
-    <p>{{myName}}</p>
+  <body ng-controller="appController">
+    <header ng-include="'modules/header/header.html'"></header>
+    <main>
+      <div class="editor" ng-include="'modules/editor/editor.html'" ng-controller="editorController"></div>
+    </main>
+    <footer ng-include="'modules/footer/footer.html'"></footer>
+
+
     <script type="text/javascript">
-    // create a wrapper around native canvas element (with id="c")
-var canvas = new fabric.Canvas('c');
 
-// create a rectangle object
-var rect = new fabric.Rect({
-left: 100,
-top: 100,
-fill: 'red',
-width: 20,
-height: 20
-});
-
-// "add" rectangle onto canvas
-canvas.add(rect);
     </script>
   </body>
 </html>
