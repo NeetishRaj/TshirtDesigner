@@ -4,11 +4,16 @@
   "description": "An SPA that is a client side editor to perform simple image editings",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node index.js"
   },
   "keywords": [
     "editor"
   ],
+  "repository": {
+    "type" : "git",
+    "url" : "https://github.com/NeetishRaj/TshirtDesigner.git"
+  },
   "author": "Neetish Raj",
   "license": "ISC",
   "dependencies": {
