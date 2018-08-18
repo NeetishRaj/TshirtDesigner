@@ -8,11 +8,11 @@
 }
 
 html{
-  background: var(--main-bg)
+  background: var(--main-bg);
 }
 
 body{
-  background: var(--main-bg)
+  background: var(--main-bg);
   margin: 0;
   color: var(--main-text);
 }
@@ -23,15 +23,29 @@ svg{
 header, footer{
   background: var(--main-bg2);
   color: var(--main-text);
+  padding-top: 5px;
+  padding-bottom: 5px;
   text-align: center;
+}
+header{
+  border-bottom: 1px solid var(--main-text);
+}
+
+nav > span{
+  color: var(--main-text);
+  text-align: left;
+  font-weight: bold;
+  font-size: 1.5em;
 }
 
 nav ul{
   list-style-type: none;
+  display: inline;
 }
 
 nav ul li{
   border: 2px solid var(--main-text);
+  /* border-right: 2px solid var(--main-text); */
   display: inline-block;
   padding: 5px;
 }
@@ -47,9 +61,8 @@ canvas{
 }
 
 main{
-}
-
-canvas{
+  margin-top: 10px;
+  margin-bottom: 10px;
 }
 
 /* Editor Container styling*/

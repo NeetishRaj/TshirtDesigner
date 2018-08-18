@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en" ng-app="designEditorApp" >
+
   <head>
     <meta charset="utf-8">
     <title>T-Shirt Design Editor</title>
@@ -13,24 +14,34 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/fabric.js/1.7.22/fabric.min.js" charset="utf-8"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.7.2/angular.min.js" charset="utf-8"></script>
     <script src="https://code.angularjs.org/1.7.2/angular-route.min.js" charset="utf-8"></script>
+
+    <!-- <script src="modules/editor/util-module.js" charset="utf-8"></script>
+    <script src="modules/editor/editor-module.js" charset="utf-8"></script>
+    <script src="modules/editor/img-module.js" charset="utf-8"></script>
+    <script src="modules/editor/editor.js" charset="utf-8"></script> -->
     <script src="app.js" charset="utf-8"></script>
-    <script src="modules/editor/controller.js" charset="utf-8"></script>
-    <script src="script/util-module.js" charset="utf-8"></script>
-    <script src="script/editor-module.js" charset="utf-8"></script>
-    <script src="script/img-module.js" charset="utf-8"></script>
-    <script src="script/editor.js" charset="utf-8"></script>
-
+    <script src="modules/header/header.controller.js" charset="utf-8"></script>
+    <script src="modules/footer/footer.controller.js" charset="utf-8"></script>
+    <script src="modules/editor/editor.controller.js" charset="utf-8"></script>
+    <script src="modules/editor/fabric.service.js" charset="utf-8"></script>
   </head>
+
   <body ng-controller="appController">
-    <header ng-include="'modules/header/header.html'"></header>
-    <main>
-      <div class="editor" ng-include="'modules/editor/editor.html'" ng-controller="editorController"></div>
+
+    <header
+      ng-include="'modules/header/header.html'"
+      ng-controller="headerController">
+    </header>
+
+    <main
+      ng-include="'modules/editor/editor.html'"
+      ng-controller="editorController as editor" >
     </main>
-    <footer ng-include="'modules/footer/footer.html'"></footer>
 
+    <footer
+      ng-include="'modules/footer/footer.html'"
+      ng-controller="footerController" >
+    </footer>
 
-    <script type="text/javascript">
-
-    </script>
   </body>
 </html>

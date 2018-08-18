@@ -1,5 +1,9 @@
+/*eslint-disable*/
+
 // Define the `designEditor` module
-const designEditorApp = angular.module("designEditorApp", ['ngRoute']);
+var designEditorApp = angular.module("designEditorApp", []);
+
+
 
 /*
  * Config function is fired before our application runs, so we set up routing
@@ -16,12 +20,10 @@ designEditorApp.run(function(){
 
 });
 
-// Define the `designEditorAppController` on the `designEditorApp` module
-designEditorApp.controller('appController', ['$scope', function($scope){
-
-  $scope.name = "Morpheus";
-
+// Define the `appController` on the `designEditorApp` module
+designEditorApp.controller('appController', [
+  function() {
 
 
-
-}]);
+  }
+]);

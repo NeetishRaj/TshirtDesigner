@@ -13,7 +13,8 @@ const user = require('./routes/user.js');
 const app = express();
 const port = process.env.PORT || 8080;
 
-app.use("/public", express.static("public"));
+app.use("/", express.static("public/app/index.html"));
+app.use("/", express.static("public/app"));
 app.use("/user", user);
 
 app.listen(port, () => {
