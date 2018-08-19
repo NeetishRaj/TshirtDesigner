@@ -23,13 +23,19 @@ Optional Features:
 
 To get you started you can simply clone the `TshirtDesigner` repository and install the dependencies:
 
-### Prerequisites
+### Requirements
 
-You need git to clone the `TshirtDesigner` repository. You can get git from [here][git].
+You will need these tools to set up a local development environment:
 
-We also use a number of Node.js tools to initialize and test `TshirtDesigner`. You must have Node.js LTS version 8.11.3
-and its package manager (npm) installed. You can get them from [here][node].
+* [NPM](https://www.npmjs.com/)
+* [NodeJS](https://nodejs.org/)
+* [Mysql Server](https://www.mysql.com/)
 
+### Setup & init
+
+In order to change Node's server environment (which by default is `local`) run this :
+```
+export NODE_ENV="dev"
 ### Clone `TshirtDesigner`
 
 Clone the `TshirtDesigner` repository using git:
@@ -47,6 +53,16 @@ To install the application we can simply do:
 ```
 npm install
 ```
+
+#### Create a user database on your local machine :
+
+```
+username : "morpheus"
+password : "godOfDreams"
+database : "thshirtDesign"
+hostname : "localhost"
+```
+check config.js file
 
 
 ### Run the Application
@@ -84,7 +100,11 @@ app/                 --> all of the source files for the application
     footer/                    --> contains footer module
       footer.controller.js        --> Controller module for footer section
       footer.html                 --> Html content for the footer
-    editor/                   --> contains editor module
+    home/                      --> contains home module
+      home.html                   --> Html content for the home
+    designs/                   --> contains designs module
+      designs.html                 --> Html content for the Mydesigns
+    editor/                    --> contains editor module
       editor.controller.js        --> Controller module for editor section
       editor.html                 --> Html content for the editor
       fabric.service.js           --> Factory service of the Fabric.js library
@@ -100,6 +120,17 @@ app/                 --> all of the source files for the application
 
 There are two kinds of tests in the `TshirtDesigner` application: Unit tests and end-to-end tests.
 
+**Tests**
+
+```sh
+$ npm test
+```
+
+**Eslint**
+
+```
+$ npm run eslint
+```
 
 ## Serving the Application Files
 
