@@ -10,15 +10,13 @@
     <meta name="copyright" content="2018, Neetish Raj">
     <meta name="keywords" content="Tshirt design editor">
     <meta name="description" content="A Simple design editor for performing light editing of images with persistance storage, will be used by editors">
+
     <link rel="stylesheet" href="app.css">
+
     <script src="https://cdnjs.cloudflare.com/ajax/libs/fabric.js/1.7.22/fabric.min.js" charset="utf-8"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.7.2/angular.min.js" charset="utf-8"></script>
     <script src="https://code.angularjs.org/1.7.2/angular-route.min.js" charset="utf-8"></script>
 
-    <!-- <script src="modules/editor/util-module.js" charset="utf-8"></script>
-    <script src="modules/editor/editor-module.js" charset="utf-8"></script>
-    <script src="modules/editor/img-module.js" charset="utf-8"></script>
-    <script src="modules/editor/editor.js" charset="utf-8"></script> -->
     <script src="app.js" charset="utf-8"></script>
     <script src="modules/header/header.controller.js" charset="utf-8"></script>
     <script src="modules/footer/footer.controller.js" charset="utf-8"></script>
@@ -34,10 +32,7 @@
       ng-controller="headerController">
     </header>
 
-    <main
-      ng-include="'modules/editor/editor.html'"
-      ng-controller="editorController as editor" >
-    </main>
+    <main ng-view></main>
 
     <footer
       ng-include="'modules/footer/footer.html'"

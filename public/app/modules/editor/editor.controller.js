@@ -30,11 +30,11 @@ angular.module("designEditorApp").
        */
       this.toggleDisplayModal = function(modalType){
         if(modalType === "imageUploadModal"){
-          this.showImageUploadModal = !this.showImageUploadModal;
+          self.showImageUploadModal = !self.showImageUploadModal;
         } else if (modalType === "textInputModal") {
-          this.showTextInputModal = !this.showTextInputModal;
+          self.showTextInputModal = !self.showTextInputModal;
         } else if (modalType === "imageDownloadModal") {
-          this.showImageDownloadModal = !this.showImageDownloadModal;
+          self.showImageDownloadModal = !self.showImageDownloadModal;
         }
       }
 

@@ -1,4 +1,4 @@
-<div class="editorContainer" ng-init="editor.load()">
+<div class="editorContainer"  ng-controller="editorController as editor" ng-init="editor.load()">
   <div class="imagePanel">
     <button
       type="button"
@@ -92,7 +92,6 @@
       </button>
     </a>
   </div>
-</div>
 
 
 <!--Image Upload Modal -->
@@ -155,5 +154,6 @@
       name="downloadImageButton" ng-click="editor.downloadImage('downloadedImageName'); editor.toggleDisplayModal('imageDownloadModal');">
       Download Image
     </button>
+  </div>
   </div>
 </div>

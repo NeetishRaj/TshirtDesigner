@@ -131,7 +131,7 @@ main{
 
 /* The Modal (background) */
 .modal {
-    /* display: none;  overtaken by ng-show */
+    display: block;  
     position: fixed; /* Stay in place */
     z-index: 100; /* Sit on top */
     padding-top: 100px; /* Location of the box */
