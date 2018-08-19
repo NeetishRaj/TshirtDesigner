@@ -65,8 +65,38 @@ angular.module("designEditorApp").
 
 
       this.addImage = function($event){
-        console.log(typeof fabric);
+        var imgElement = $event.currentTarget;
+        var newImageInstance = new fabric.Image(imgElement, {
+          left: 100,
+          top: 100,
+          angle: 0,
+          opacity: 1.0
+        });
+
+        // Add the dblclick event listener to delete this from editor
+
+        newImageInstance.on("mousedown", function(options){
+          //
+        });
+
+        // Add the new image object to our fabricObjArray
+        self.fabricObjArray.push(newImageInstance);
+        editor.add(newImageInstance);
       }
+
+      /*
+      * create the canvas and initialize the fabric editor
+      *
+      */
+      var parentElement = $window.document.querySelector(".canvasPanel");
+      console.log(parentElement);
+      this.canvasId = "canvasFabric";
+      this.canvas = util.createCanvas(parentElement, self.canvasId);
+      this.fabricObjArray = [];
+
+      // Initialize the fanric.js instance with the canvas
+      this.editor = new fabric.Canvas(self.canvasId);
+
 
     }
   ]);

@@ -26,12 +26,12 @@
         ng-src="{{image}}"
         ng-repeat="image in editor.imageDataList"
         draggable="false"
-        ng-click="">
+        ng-click="editor.addImage($event)">
 
     </div>
   </div>
 
-  <div class="canvasPanel">
+  <div class="canvasPanel" onload="editor.initEditor()">
   </div>
 
   <div class="controlPanel">
