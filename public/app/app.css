@@ -96,6 +96,10 @@ main{
   object-fit: cover;
 }
 
+.imagesContainer img:hover{
+  cursor: pointer;
+}
+
 .canvasPanel{
   background-color:#cfcfcf;
   background-image: linear-gradient(white 2px, transparent 2px),
@@ -121,10 +125,13 @@ main{
   padding: 5px;
 }
 
+.panelButton:hover{
+  cursor: pointer;
+}
 
 /* The Modal (background) */
 .modal {
-    display: none; /* Hidden by default */
+    /* display: none;  overtaken by ng-show */
     position: fixed; /* Stay in place */
     z-index: 100; /* Sit on top */
     padding-top: 100px; /* Location of the box */

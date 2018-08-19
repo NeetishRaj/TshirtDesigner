@@ -4,14 +4,14 @@
       type="button"
       name="imageAddButton"
       class="panelButton"
-      onclick="UtilModule.openModal('imageUploadModal')">
+      ng-click="editor.toggleDisplayModal('imageUploadModal')">
       Add Images
     </button>
     <button
       type="button"
       name="imageAddButton"
       class="panelButton"
-      onclick="UtilModule.openModal('textInputModal')">
+      ng-click="editor.toggleDisplayModal('textInputModal')">
       Add Text
     </button>
     <div class="imagesContainer">
@@ -21,7 +21,13 @@
       src="https://i.imgur.com/Sv5XTlh.png"
       alt="tshirt Template"
       draggable="false"
-      onclick="EditorModule.addImage(this)">
+      ng-click="editor.addImage($event)">
+      <img
+        ng-src="{{image}}"
+        ng-repeat="image in editor.imageDataList"
+        draggable="false"
+        ng-click="">
+
     </div>
   </div>
 
@@ -33,14 +39,14 @@
       type="button"
       name="editHistory"
       class="panelButton"
-      onclick="">
+      ng-click="">
       Edit History
     </button>
     <button
       type="button"
       name="editHistory"
       class="panelButton"
-      onclick=""
+      ng-click=""
       style="width:49%;">
       Undo
     </button>
@@ -48,7 +54,7 @@
       type="button"
       name="editHistory"
       class="panelButton"
-      onclick=""
+      ng-click=""
       style="width:49%;">
       Redo
     </button>
@@ -57,7 +63,7 @@
       type="button"
       name="imageRemoveButton"
       class="panelButton"
-      onclick="EditorModule.removeObject()"
+      ng-click="EditorModule.removeObject()"
       style="margin-top:60px;">
       Remove Selected
     </button>
@@ -65,14 +71,14 @@
       type="button"
       name="imageRemoveButton"
       class="panelButton"
-      onclick="EditorModule.layerUp()">
+      ng-click="EditorModule.layerUp()">
       Layer Up Selected
     </button>
     <button
       type="button"
       name="imageRemoveButton"
       class="panelButton"
-      onclick="EditorModule.layerDown()">
+      ng-click="EditorModule.layerDown()">
       Layer Down Selected
     </button>
 
@@ -81,7 +87,7 @@
         type="button"
         name="imageDownloadButton"
         class="panelButton"
-        onclick="UtilModule.openModal('imageDownloadModal');" style="margin-top:60px;">
+        ng-click="editor.toggleDisplayModal('imageDownloadModal');" style="margin-top:60px;">
         Download Image
       </button>
     </a>
@@ -90,33 +96,31 @@
 
 
 <!--Image Upload Modal -->
-<div id="imageUploadModal" class="modal">
+<div class="modal" ng-show="editor.showImageUploadModal">
   <div class="modal-content">
     <span
       class="close"
-      onclick="UtilModule.closeModal('imageUploadModal')">
+      ng-click="editor.toggleDisplayModal('imageUploadModal')">
       &times;
     </span>
     <p>Pick your Image to use for editing.</p>
-    <form method="post" enctype="multipart/form-data" action="/upload">
-      <input
-        type="file"
-        accept="image/*"
-        onchange="ImgModule.fetchImage(event)"><br>
-      <img id="output" style="height:100px; width=100px"><br>
-      <input
-        type="submit"
-        value="Save Image to your profile">
-    </form>
+    <input
+    type="file"
+    accept="image/*"
+    return-files
+    ng-model="editor.imageList"
+    ng-change="editor.uploadImages()"
+    multiple><br>
+    <div ng-repeat="image in editor.imageList">{{image.name}}</div>
   </div>
 </div>
 
 <!--Text Input Modal -->
-<div id="textInputModal" class="modal">
+<div class="modal" ng-show="editor.showTextInputModal">
   <div class="modal-content">
     <span
       class="close"
-      onclick="UtilModule.closeModal('textInputModal')">
+      ng-click="editor.toggleDisplayModal('textInputModal')">
       &times;
     </span>
     <p>Enter the text</p>
@@ -124,18 +128,18 @@
     <button
       type="button"
       name="insertTextButton"
-      onclick="EditorModule.addText('textInput'); UtilModule.closeModal('textInputModal') ">
+      ng-click="EditorModule.addText('textInput'); editor.toggleDisplayModal('textInputModal') ">
       Insert Text
     </button>
   </div>
 </div>
 
 <!--Image Download Modal -->
-<div id="imageDownloadModal" class="modal">
+<div class="modal" ng-show="editor.showImageDownloadModal">
   <div class="modal-content">
     <span
       class="close"
-      onclick="UtilModule.closeModal('imageDownloadModal')">
+      ng-click="editor.toggleDisplayModal('imageDownloadModal')">
       &times;
     </span>
     <p>
@@ -148,7 +152,7 @@
     </p>
     <button
       type="button"
-      name="downloadImageButton" onclick="ImgModule.downloadImage('downloadedImageName'); UtilModule.closeModal('imageDownloadModal');">
+      name="downloadImageButton" ng-click="ImageModule.downloadImage('downloadedImageName'); editor.toggleDisplayModal('imageDownloadModal');">
       Download Image
     </button>
   </div>

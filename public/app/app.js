@@ -7,7 +7,7 @@ var designEditorApp = angular.module("designEditorApp", []);
 
 /*
  * Config function is fired before our application runs, so we set up routing
- * here, all the preparations comes here
+ * here, all the preparations comes here as well
  */
 designEditorApp.config(function(){
 

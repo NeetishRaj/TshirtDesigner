@@ -69,6 +69,7 @@ public/               --> all of the angularjs source files for client side
   test/                  --> Test for angular app
 routes/               --> contains the files Http methods for all the routes     
 index.js              --> Entry point for our Nodejs server
+config.js             --> Database and auth configurations(should be private)
 ```
 
 ## Directory Layout for Angularjs App
@@ -77,16 +78,17 @@ index.js              --> Entry point for our Nodejs server
 app/                 --> all of the source files for the application
   app.css               --> default stylesheet
   modules/              --> all app specific modules
-    header/                    --> version related components
+    header/                    --> contains header module
       header.controller.js        --> Controller module for header section
       header.html                 --> Html content for the header
-    footer/                    --> version related components
+    footer/                    --> contains footer module
       footer.controller.js        --> Controller module for footer section
       footer.html                 --> Html content for the footer
-    editor/                   --> version related components
+    editor/                   --> contains editor module
       editor.controller.js        --> Controller module for editor section
       editor.html                 --> Html content for the editor
       fabric.service.js           --> Factory service of the Fabric.js library
+      image.service.js           --> Factory service for image based operations
   images/               --> the images folder
   app.js                --> main application module
   index.html            --> app layout file (the main html template file of the app)
