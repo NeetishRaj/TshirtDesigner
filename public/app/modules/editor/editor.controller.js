@@ -21,6 +21,7 @@ angular.module("designEditorApp").
       this.showImageUploadModal = false;
       this.showTextInputModal = false;
       this.showImageDownloadModal = false;
+      this.showEditHistoryModal = false;
 
       /*
        * Toggles the display of designated modal box using ng-show
@@ -35,6 +36,8 @@ angular.module("designEditorApp").
           self.showTextInputModal = !self.showTextInputModal;
         } else if (modalType === "imageDownloadModal") {
           self.showImageDownloadModal = !self.showImageDownloadModal;
+        } else if (modalType === "editHistoryModal") {
+          self.showEditHistoryModal = !self.showEditHistoryModal;
         }
       }
 
@@ -105,7 +108,98 @@ angular.module("designEditorApp").
 
         // Initialize the fanric.js instance with the canvas
         self.fabricCanvas = new fabric.Canvas(self.canvasId);
-      };
+
+
+        /*
+        * Set eventlisteners to track user actions after each render
+        * and save the state for redo operations.
+        * NOTE; we will save state based on 3 events
+        * object added, object removed and object modified
+        */
+        self.fabricCanvas.on({
+          "object:added": self.updateActionList,
+          "object:removed": self.updateActionList,
+          "object:modified": self.updateActionList
+        });
+      }
+
+
+      /*
+      * This function on the call of three events push the current
+      * fabric state to the array in order to be retrieved later
+      */
+      this.updateActionList = function(){
+
+        if(self.undoRedoFlag){
+          self.undoRedoFlag = false;
+          return false;
+        }
+        // There is no objects in the canvas then clear the array
+        self.actionsArray.push(angular.toJson(self.fabricCanvas));
+        self.currentActionIndex = self.actionsArray.length - 1;
+        console.log("updated");
+      }
+
+      this.currentActionIndex = 0;
+      this.undoRedoFlag = false;
+      /*
+      * Undo function reverts the editor to last edit state by going back
+      * the actions array and by keeping track of currentActionIndex
+      */
+      this.undo = function(){
+
+        if(self.currentActionIndex > 0){
+          self.currentActionIndex -= 1;
+        }
+
+        self.undoRedoFlag = true;
+        console.log(self.currentActionIndex);
+        /*
+        * In order to to undo we must load old json states that had been pushed
+        * on each modifications
+        */
+        self.loadFabricOnJSON(self.actionsArray[self.currentActionIndex]);
+      }
+
+
+      /*
+      * Redo function reverts the editor to next edit state by going
+      * one step the actions array and by keeping track of currentActionIndex
+      */
+      this.redo = function(){
+
+        if(self.currentActionIndex < this.actionsArray.length -1 ){
+          self.currentActionIndex += 1;
+        }
+        console.log(self.currentActionIndex);
+        self.undoRedoFlag = true;
+
+        /*
+        * In order to to redo we must load old json states that had been pushed
+        * on each modifications
+        */
+        self.loadFabricOnJSON(self.actionsArray[self.currentActionIndex]);
+
+      }
+
+      this.goToEditHistory = function($index){
+        self.undoRedoFlag = true;
+        self.loadFabricOnJSON(self.actionsArray[$index]);
+      }
+
+      this.loadFabricOnJSON = function(jsonArg){
+        self.fabricCanvas.loadFromJSON(
+          jsonArg,
+          function(){
+            self.fabricCanvas.renderAll();
+            self.fabricCanvas.calcOffset();
+          },
+          function(o, object){
+            self.fabricCanvas.setActiveObject(object);
+          }
+        );
+      }
+
 
       /*
        * This takes text from the input box and creates a fabric instance
@@ -203,6 +297,29 @@ angular.module("designEditorApp").
         download.setAttribute("href", image);
         download.setAttribute("download", imageName);
       }
+
+
+      this.actionsArray = [];
+
+      /*
+       * It reonoves all the objects from the fabric canvas
+       * @return {Null}
+       */
+      this.clearEditor = function(){
+
+        // Warn the user
+        $window.alert("Warning: Edit history will be deleted");
+
+        // Clear our objects array fabricObjArray
+        self.fabricObjArray = [];
+
+        // Clear the actionsArray that provides edit history
+        self.actionsArray = [];
+
+        // Finally clear the fabric canvas with all the objects
+        self.fabricCanvas.clear();
+      };
+
 
 
     }

@@ -129,9 +129,13 @@ main{
   cursor: pointer;
 }
 
+.halfButton{
+  width: 49%;
+}
+
 /* The Modal (background) */
 .modal {
-    display: block;  
+    display: block;
     position: fixed; /* Stay in place */
     z-index: 100; /* Sit on top */
     padding-top: 100px; /* Location of the box */

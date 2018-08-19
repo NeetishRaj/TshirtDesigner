@@ -37,6 +37,7 @@ In order to change Node's server environment (which by default is `local`) run t
 ```
 export NODE_ENV="dev"
 ### Clone `TshirtDesigner`
+```
 
 Clone the `TshirtDesigner` repository using git:
 
@@ -126,7 +127,7 @@ There are two kinds of tests in the `TshirtDesigner` application: Unit tests and
 $ npm test
 ```
 
-**Eslint**
+<!-- **Eslint** -->
 
 ```
 $ npm run eslint
