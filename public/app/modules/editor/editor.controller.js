@@ -79,24 +79,99 @@ angular.module("designEditorApp").
           //
         });
 
+        self.fabricCanvas.add(newImageInstance);
         // Add the new image object to our fabricObjArray
         self.fabricObjArray.push(newImageInstance);
-        editor.add(newImageInstance);
       }
 
       /*
       * create the canvas and initialize the fabric editor
       *
       */
-      var parentElement = $window.document.querySelector(".canvasPanel");
-      console.log(parentElement);
+
       this.canvasId = "canvasFabric";
-      this.canvas = util.createCanvas(parentElement, self.canvasId);
       this.fabricObjArray = [];
+      this.fabricCanvas = {};
 
-      // Initialize the fanric.js instance with the canvas
-      this.editor = new fabric.Canvas(self.canvasId);
 
+      /*
+       * The initial function that is called after loading of DOM
+       * it creates and initializes our fabric canvas
+       * @return {Null}
+       */
+      this.load = function(){
+        var parentElement = $window.document.querySelector(".canvasPanel");
+        util.createCanvas(parentElement, self.canvasId);
+
+        // Initialize the fanric.js instance with the canvas
+        self.fabricCanvas = new fabric.Canvas(self.canvasId);
+      };
+
+      /*
+       * This takes text from the input box and creates a fabric instance
+       * of that text
+       * @param {String} the string id of the textarea element
+       * @return {Null}
+       */
+      this.addText = function(textAreaId){
+        var text = $window.document.getElementById(textAreaId).value;
+
+        if(text !== ""){
+          var newFabricText = new fabric.Text(text, {
+            shadow: 'rgba(0,0,0,0.3) 5px 5px 5px',
+            fontStyle: 'italic',
+            fontFamily: 'Hoefler Text',
+            stroke: '#3a3a5d',
+            strokeWidth: 3,
+            textAlign: 'right',
+            lineHeight:1,
+            textBackgroundColor: 'rgba(0,200,0,0)'
+          });
+
+          // Add the newly created text object to our fabricObjArray
+          self.fabricObjArray.push(newFabricText);
+          self.fabricCanvas.add(newFabricText);
+
+        } else {
+          $window.alert("Please enter text before Submitting")
+        }
+      }
+
+      /*
+       * It removes the current selected object after the button press
+       * @return {Null}
+       */
+      this.removeObject = function(){
+        /*
+        * Find the index of the object to be deleted and delete it from
+        *  our array fabricObjArray
+        */
+        var fabCan = self.fabricCanvas;
+        var index = self.fabricObjArray.indexOf(fabCan.getActiveObject());
+
+        // Clear the object from our array
+        self.fabricObjArray.splice(index, 1);
+
+        // Clear the object from fabric's collection
+        fabCan.remove(fabCan.getActiveObject());
+      };
+
+
+      /*
+       * Moves the selected object one layer up
+       * @return {Null}
+       */
+      this.layerUp = function(){
+        self.fabricCanvas.bringForward(self.fabricCanvas.getActiveObject());
+      }
+
+      /*
+       * Moves the selected object one layer down
+       * @return {Null}
+       */
+      this.layerDown = function(){
+        self.fabricCanvas.sendBackwards(self.fabricCanvas.getActiveObject());
+      }
 
     }
   ]);

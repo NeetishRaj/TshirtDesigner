@@ -1,4 +1,4 @@
-<div class="editorContainer">
+<div class="editorContainer" ng-init="editor.load()">
   <div class="imagePanel">
     <button
       type="button"
@@ -31,7 +31,7 @@
     </div>
   </div>
 
-  <div class="canvasPanel" onload="editor.initEditor()">
+  <div class="canvasPanel" >
   </div>
 
   <div class="controlPanel">
@@ -63,7 +63,7 @@
       type="button"
       name="imageRemoveButton"
       class="panelButton"
-      ng-click="EditorModule.removeObject()"
+      ng-click="editor.removeObject()"
       style="margin-top:60px;">
       Remove Selected
     </button>
@@ -71,14 +71,14 @@
       type="button"
       name="imageRemoveButton"
       class="panelButton"
-      ng-click="EditorModule.layerUp()">
+      ng-click="editor.layerUp()">
       Layer Up Selected
     </button>
     <button
       type="button"
       name="imageRemoveButton"
       class="panelButton"
-      ng-click="EditorModule.layerDown()">
+      ng-click="editor.layerDown()">
       Layer Down Selected
     </button>
 
@@ -128,7 +128,7 @@
     <button
       type="button"
       name="insertTextButton"
-      ng-click="EditorModule.addText('textInput'); editor.toggleDisplayModal('textInputModal') ">
+      ng-click="editor.addText('textInput'); editor.toggleDisplayModal('textInputModal') ">
       Insert Text
     </button>
   </div>
