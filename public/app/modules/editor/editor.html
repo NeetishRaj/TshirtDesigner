@@ -18,7 +18,7 @@
       <p>Single click on images to add them to editor</p>
       <p>To remove image/text from editor select them, and click Remove Selected button</p>
       <img
-      src="https://i.imgur.com/Sv5XTlh.png"
+      src="images/tshirt_template.png"
       alt="tshirt Template"
       draggable="false"
       ng-click="editor.addImage($event)">
@@ -152,7 +152,7 @@
     </p>
     <button
       type="button"
-      name="downloadImageButton" ng-click="ImageModule.downloadImage('downloadedImageName'); editor.toggleDisplayModal('imageDownloadModal');">
+      name="downloadImageButton" ng-click="editor.downloadImage('downloadedImageName'); editor.toggleDisplayModal('imageDownloadModal');">
       Download Image
     </button>
   </div>

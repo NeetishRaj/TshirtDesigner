@@ -163,7 +163,7 @@ angular.module("designEditorApp").
        */
       this.layerUp = function(){
         self.fabricCanvas.bringForward(self.fabricCanvas.getActiveObject());
-      }
+      };
 
       /*
        * Moves the selected object one layer down
@@ -171,7 +171,39 @@ angular.module("designEditorApp").
        */
       this.layerDown = function(){
         self.fabricCanvas.sendBackwards(self.fabricCanvas.getActiveObject());
+      };
+
+
+      /*
+       * Fetches the image data url from the Fabric.js canvas and downloads it
+       * as a "image/png" format
+       * @public
+       * @param {String} Id of the input element that holds the image name
+       * @return {Null}
+       */
+      this.downloadImage = function(inputId){
+        var download = $window.document.getElementById("download");
+        var imageName = $window.document.getElementById(inputId).value;
+        var image = $window.document.
+        getElementById(self.canvasId).
+        toDataURL("image/png").
+        replace("image/pngremoveObject", "image/octet-stream");
+
+        // Set the image name for the downloaded image
+
+        /*
+        * @TODO Fix the download image button bug
+        * It downloads the image after the second press of the button
+        */
+        if(imageName === "" || typeof imageName === "undefined"){
+          imageName = "MyTshirtDesign.png"
+        }
+
+        // Downloads the image
+        download.setAttribute("href", image);
+        download.setAttribute("download", imageName);
       }
+
 
     }
   ]);
