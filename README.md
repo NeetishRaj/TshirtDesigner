@@ -117,7 +117,6 @@ app/                 --> all of the source files for the application
   images/               --> the images folder
   app.js                --> main application module
   index.html            --> app layout file (the main html template file of the app)
-  index.html            --> app layout file (the main html template file of the app)
 ```
 
 
