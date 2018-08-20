@@ -1,7 +1,23 @@
-<div class="">
+<div
+  class=""
+  ng-controller="designsController as designs"
+  ng-init="designs.load()"
+  style="text-align:center;">
 
   <h1>My Saved Designs</h1>
   <hr>
-  
+
+  <div
+    class=""
+    ng-repeat="myEdit in designs.myEditsArray"
+    style="border:1px solid #555; background: #dfdfdf;">
+
+    <p>
+      <span>{{myEdit.id}}. </span>
+      <span>{{myEdit.name}}</span>
+    </p>
+    <p>Last Updated: {{myEdit.updatedAt}}</p>
+    <p>Created On: {{myEdit.createdAt}}</p>
+  </div>
 
 </div>

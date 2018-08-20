@@ -23,7 +23,7 @@ designEditorApp.config([
       }).
       when('/designs', {
         templateUrl: 'modules/designs/designs.html',
-        // controller: 'designsController'
+        controller: 'designsController'
       }).
       when('/editor', {
         templateUrl: 'modules/editor/editor.html',

@@ -1,4 +1,7 @@
-<div class="editorContainer"  ng-controller="editorController as editor" ng-init="editor.load()">
+<div
+  class="editorContainer"
+  ng-controller="editorController as editor"
+  ng-init="editor.load()">
   <div class="imagePanel">
     <button
       type="button"
@@ -180,8 +183,8 @@
       </span>
       <div
         class=""
-        ng-repeat="edit in editor.actionsArray track by $index"editor.toggleDisplayModal('saveCurrentEditModal')
-        style="text-align:center; margin-top:15px;margin-right:15px;">
+        ng-repeat="edit in editor.actionsArray track by $index"
+        style="text-align:center; margin-top:15px; margin-right:15px;">
         Go to
         <button
           type="button"

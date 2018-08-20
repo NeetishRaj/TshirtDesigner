@@ -40,6 +40,14 @@
       );
     };
 
+    data.getDesignList = function(){
+      return $http.get("/design/getDesignList").
+        then(function(response){
+            return response.data;
+          }
+        );
+    };
+
 
     return data;
   }

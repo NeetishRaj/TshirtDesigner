@@ -83,10 +83,12 @@ Now browse to the app at [`localhost:8080/index.html`][local-app-url].
 
 ```
 model/                --> The mysql data model files for the application
+  design-model.js        --> consists of the data model for the design table
 public/               --> all of the angularjs source files for client side     
   app/                   --> Angularjs client side code
   test/                  --> Test for angular app
 routes/               --> contains the files Http methods for all the routes     
+  design.js              --> consists of all the http api routes for the designs  
 index.js              --> Entry point for our Nodejs server
 config.js             --> Database and auth configurations(should be private)
 ```
@@ -106,6 +108,7 @@ app/                 --> all of the source files for the application
     home/                      --> contains home module
       home.html                   --> Html content for the home
     designs/                   --> contains designs module
+      designs.controller.js        --> Controller module for designs section
       designs.html                 --> Html content for the Mydesigns
     editor/                    --> contains editor module
       editor.controller.js        --> Controller module for editor section
