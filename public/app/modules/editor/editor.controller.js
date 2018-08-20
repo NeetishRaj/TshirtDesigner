@@ -64,6 +64,7 @@ angular.module("designEditorApp").
         var input = $window.document.querySelector('input[type="file"]');
 
         reader.readAsDataURL(input.files[0]);
+
       }
 
 
@@ -119,10 +120,15 @@ angular.module("designEditorApp").
         self.fabricCanvas.on({
           "object:added": self.updateActionList,
           "object:removed": self.updateActionList,
-          "object:modified": self.updateActionList
+          "object:modified": self.updateActionList,
+          "mouse:down": self.handleEditorClick
         });
       }
 
+
+      this.currentActionIndex = 0;
+      this.undoRedoFlag = false;
+      this.actionsArray = [];
 
       /*
       * This function on the call of three events push the current
@@ -130,18 +136,28 @@ angular.module("designEditorApp").
       */
       this.updateActionList = function(){
 
-        if(self.undoRedoFlag){
+        // Dont save changes when doing undo, redo and go to edit history
+        if(!self.undoRedoFlag){
           self.undoRedoFlag = false;
-          return false;
+
+          // There is no objects in the canvas then clear the array
+          self.actionsArray.push(angular.toJson(self.fabricCanvas));
+          self.currentActionIndex = self.actionsArray.length - 1;
         }
-        // There is no objects in the canvas then clear the array
-        self.actionsArray.push(angular.toJson(self.fabricCanvas));
-        self.currentActionIndex = self.actionsArray.length - 1;
-        console.log("updated");
       }
 
-      this.currentActionIndex = 0;
-      this.undoRedoFlag = false;
+      /*
+      * It is fired whenever canvas editor is clicked and we can do any
+      * task related to that event inside this function
+      */
+      this.handleEditorClick = function(){
+        /*
+        * Initialize the undoredo flag to false so that changes
+        * made on the editor can be saved
+        */
+        self.undoRedoFlag = false;
+      }
+
       /*
       * Undo function reverts the editor to last edit state by going back
       * the actions array and by keeping track of currentActionIndex
@@ -153,7 +169,6 @@ angular.module("designEditorApp").
         }
 
         self.undoRedoFlag = true;
-        console.log(self.currentActionIndex);
         /*
         * In order to to undo we must load old json states that had been pushed
         * on each modifications
@@ -171,7 +186,6 @@ angular.module("designEditorApp").
         if(self.currentActionIndex < this.actionsArray.length -1 ){
           self.currentActionIndex += 1;
         }
-        console.log(self.currentActionIndex);
         self.undoRedoFlag = true;
 
         /*
@@ -185,6 +199,7 @@ angular.module("designEditorApp").
       this.goToEditHistory = function($index){
         self.undoRedoFlag = true;
         self.loadFabricOnJSON(self.actionsArray[$index]);
+        self.toggleDisplayModal("editHistoryModal");
       }
 
       this.loadFabricOnJSON = function(jsonArg){
@@ -278,28 +293,29 @@ angular.module("designEditorApp").
       this.downloadImage = function(inputId){
         var download = $window.document.getElementById("download");
         var imageName = $window.document.getElementById(inputId).value;
-        var image = $window.document.
-        getElementById(self.canvasId).
-        toDataURL("image/png").
-        replace("image/pngremoveObject", "image/octet-stream");
 
         // Set the image name for the downloaded image
+        if(imageName === "" || typeof imageName === "undefined"){
+          imageName = "MyTshirtDesign.png"
+        }
 
         /*
         * @TODO Fix the download image button bug
         * It downloads the image after the second press of the button
         */
-        if(imageName === "" || typeof imageName === "undefined"){
-          imageName = "MyTshirtDesign.png"
-        }
+
+        var image = $window.document.
+        getElementById(self.canvasId).
+        toDataURL("image/png").
+        replace("image/pngremoveObject", "image/octet-stream");
 
         // Downloads the image
         download.setAttribute("href", image);
         download.setAttribute("download", imageName);
+
       }
 
 
-      this.actionsArray = [];
 
       /*
        * It reonoves all the objects from the fabric canvas
@@ -320,6 +336,9 @@ angular.module("designEditorApp").
         self.fabricCanvas.clear();
       };
 
+      this.saveCurrentEdit = function(){
+        console.log(self.actionsArray[self.actionsArray.length - 1]);
+      }
 
 
     }
