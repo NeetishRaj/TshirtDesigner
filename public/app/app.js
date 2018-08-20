@@ -49,3 +49,20 @@ designEditorApp.controller('appController', [
 
   }
 ]);
+
+
+/*
+* A return-files directive to work with the images upload and catch the
+* ng-change event properly without throwing error
+*/
+designEditorApp.directive("returnFiles", function() {
+  return {
+    require: "ngModel",
+    link: function postLink(scope,elem,attrs,ngModel) {
+      elem.on("change", function(e) {
+        var files = elem[0].files;
+        ngModel.$setViewValue(files);
+      })
+    }
+  }
+});

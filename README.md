@@ -108,8 +108,10 @@ app/                 --> all of the source files for the application
     editor/                    --> contains editor module
       editor.controller.js        --> Controller module for editor section
       editor.html                 --> Html content for the editor
-      fabric.service.js           --> Factory service of the Fabric.js library
-      util.service.js             --> Factory service for few common DOM operations
+  services/              --> contains all the angular services used in the app
+      fabric.service.js      --> Factory service of the Fabric.js library
+      util.service.js        --> Factory service for few common DOM operations
+      data.service.js        --> Factory service for all the http methods to server
   images/               --> the images folder
   app.js                --> main application module
   index.html            --> app layout file (the main html template file of the app)
