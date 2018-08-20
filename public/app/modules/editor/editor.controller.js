@@ -10,10 +10,10 @@ angular.module("designEditorApp").
   controller("editorController", [
     "$window",
     "util",
-    function($window, util){
+    "data",
+    function($window, util, data){
 
       var self = this;
-
       /*
       * Boolean variables to show their corresponding modal divs bu using
       * ng-show directive
@@ -22,6 +22,7 @@ angular.module("designEditorApp").
       this.showTextInputModal = false;
       this.showImageDownloadModal = false;
       this.showEditHistoryModal = false;
+      this.showSaveCurrentEditModal = false;
 
       /*
        * Toggles the display of designated modal box using ng-show
@@ -38,6 +39,8 @@ angular.module("designEditorApp").
           self.showImageDownloadModal = !self.showImageDownloadModal;
         } else if (modalType === "editHistoryModal") {
           self.showEditHistoryModal = !self.showEditHistoryModal;
+        } else if (modalType === "saveCurrentEditModal") {
+          self.showSaveCurrentEditModal = !self.showSaveCurrentEditModal;
         }
       }
 
@@ -336,8 +339,24 @@ angular.module("designEditorApp").
         self.fabricCanvas.clear();
       };
 
+      this.currentEditName = "";
       this.saveCurrentEdit = function(){
-        console.log(self.actionsArray[self.actionsArray.length - 1]);
+
+        if(self.currentEditName === ""){
+          $window.alert("Please enter a valid name for the editor");
+          return;
+        }
+
+        var editData = {
+          "name": self.currentEditName,
+          "edits": angular.toJson(self.actionsArray)
+        };
+
+        data.insertDesign(editData).
+          then(function(response){
+            self.toggleDisplayModal('saveCurrentEditModal');
+            console.log(response.message);
+        });
       }
 
 

@@ -19,11 +19,27 @@
       return null;
     }
 
-    data.getDesign = function(id){
-      
-    }
-
     var data = {};
+
+    data.getDesign = function(id){
+      var promise1 = $http.get("/design/getDesign/" + id);
+      var promise2 = promise1.then(function(response){
+        return response.data;
+      });
+
+      return promise2;
+    };
+
+    data.insertDesign = function(editData){
+      editData = angular.toJson(editData);
+
+      return $http.post("/design/insertDesign", editData).
+        then(function(response){
+            return response.data;
+        }
+      );
+    };
+
 
     return data;
   }

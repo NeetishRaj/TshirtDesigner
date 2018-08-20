@@ -16,17 +16,17 @@ router.get("/", (req, res) => {
 
 router.post("/insertDesign", (req, res) => {
 
-  db.insertDesign(req.body, (msg) => {
-    console.log(msg);
-    res.end(msg);
+  db.insertDesign(req.body, (dbResponse) => {
+    console.log(dbResponse);
+    res.end(JSON.stringify(dbResponse));
   })
 
 });
 
 router.get("/getDesign/:id", (req, res) => {
 
-  db.getDesign(req.params.id, (data, msg) => {
-    console.log(msg);
+  db.getDesign(req.params.id, (data, dbResponse) => {
+    console.log(dbResponse);
     res.end(JSON.stringify(data));
   });
 });
@@ -34,8 +34,8 @@ router.get("/getDesign/:id", (req, res) => {
 
 router.get("/getDesignList", (req, res) => {
 
-  db.getDesignList((data, msg) => {
-    console.log(msg);
+  db.getDesignList((data, dbResponse) => {
+    console.log(dbResponse);
     res.end(JSON.stringify(data));
   });
 });

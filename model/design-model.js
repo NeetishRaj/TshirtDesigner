@@ -51,24 +51,35 @@ module.exports.insertDesign = function(designData, callback){
   Design.create(designData).
     then(
     () => {
-      callback("successfully inserted a new row");
+      callback({
+        "message": "successfully inserted a new row",
+        "success": true
+      });
     },
     () => {
-      callback("Something went wrong during new row creation");
+      callback({
+        "message": "Something went wrong during new row creation",
+        "success": false
+      });
     }
   );
 };
-sequelize.query("SELECT * FROM myTable")
 
 module.exports.getDesign = function(id, callback){
 
   Design.findById(parseInt(id, 10)).
     then(
     (data) => {
-      callback(data, "successfully retrieved data");
+      callback(data, {
+        "message": "successfully retrieved data",
+        "success": true
+      });
     },
     () => {
-      callback(null, "Something went wrong during data retrieval");
+      callback(null, {
+        "message": "Something went wrong during data retrieval",
+        "success": false
+      });
     }
   );
 };
@@ -77,10 +88,16 @@ module.exports.getDesignList = function(callback){
   sequelize.query("SELECT * FROM designs").
     then(
     (data) => {
-      callback(data, "successfully retrieved data");
+      callback(data, {
+        "message": "successfully retrieved all the desings list",
+        "success": true
+      });
     },
     () => {
-      callback(null, "Something went wrong during data retrieval");
+      callback(null, {
+        "message": "Something went wrong during design list retrieval",
+        "success": false
+      });
     }
   );
 }
