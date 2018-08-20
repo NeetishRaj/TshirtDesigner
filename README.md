@@ -2,6 +2,8 @@
 
 This project is an Angularjs application that Utilizes [Fabric.js][fabric.js] library to make an Tshirt deisgn editor that can support image uploading, resizing and rotation.
 
+![alt text](https://i.imgur.com/bUTN9jG.png)
+
 ### Design Requirements
 
 1. Use the MyEAN stack (MySQL, ExpressJS, AngularJS, NodeJS).  along with fabric.js
