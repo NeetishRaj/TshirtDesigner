@@ -7,7 +7,8 @@ const Sequelize = require('sequelize');
  * therefore using symbol based connections as shown below.
  */
 
-const sequelize = new Sequelize(
+
+/*const sequelize = new Sequelize(
   config.db.name,
   config.db.username,
   config.db.password,
@@ -23,8 +24,9 @@ const sequelize = new Sequelize(
     },
     "port": config.db.port
   }
-);
+);*/
 
+const sequelize = new Sequelize(process.env.DATABASE_URL);
 
 const Design = sequelize.define('design', {
   "edits": {

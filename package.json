@@ -12,8 +12,8 @@
     "editor"
   ],
   "repository": {
-    "type" : "git",
-    "url" : "https://github.com/NeetishRaj/TshirtDesigner.git"
+    "type": "git",
+    "url": "https://github.com/NeetishRaj/TshirtDesigner.git"
   },
   "author": "Neetish Raj",
   "license": "ISC",
@@ -21,6 +21,8 @@
     "angular": "^1.7.2",
     "express": "^4.16.3",
     "mysql2": "^1.6.1",
+    "pg": "^7.4.3",
+    "pg-hstore": "^2.3.2",
     "sequelize": "^4.38.0"
   },
   "devDependencies": {}
