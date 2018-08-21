@@ -3,7 +3,6 @@ const Sequelize = require('sequelize');
 
 /*
  * Uri string based connection is deprecated in Sequelize for security reasons
- *"name"e"e"quelize =
  * new Sequelize('mysql://morpheus:godOfDreams@localhost:3306/tshirtDesign');
  * therefore using symbol based connections as shown below.
  */
@@ -13,17 +12,19 @@ const sequelize = new Sequelize(
   config.db.username,
   config.db.password,
   {
-    "dialect": 'mysql',
-    "host": 'localhost',
+    "dialect": config.db.dialect,
+    "host": config.db.host,
     "operatorsAliases": false,
     "pool": {
       "acquire": 30000,
       "idle": 10000,
       "max": 5,
       "min": 0
-    }
+    },
+    "port": config.db.port
   }
 );
+
 
 const Design = sequelize.define('design', {
   "edits": {
@@ -43,7 +44,7 @@ const Design = sequelize.define('design', {
   }
 });
 
-Design.sync();
+// Design.sync();
 
 
 module.exports.insertDesign = function(designData, callback){

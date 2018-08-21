@@ -22,7 +22,6 @@ angular.module("designEditorApp").controller("designsController", [
         }
       );
 
-      console.log('HI');
     }
   }
 ])
