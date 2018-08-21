@@ -15,6 +15,12 @@
     <p>
       <span>{{myEdit.id}}. </span>
       <span>{{myEdit.name}}</span>
+      <button
+        type="button"
+        name="goToEditorbutton"
+        ng-click="designs.goToEditor($index)">
+        <a href="/">Load In Editor</a>
+      </button>
     </p>
     <p>Last Updated: {{myEdit.updatedAt}}</p>
     <p>Created On: {{myEdit.createdAt}}</p>

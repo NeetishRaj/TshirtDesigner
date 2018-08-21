@@ -126,6 +126,24 @@ angular.module("designEditorApp").
           "object:modified": self.updateActionList,
           "mouse:down": self.handleEditorClick
         });
+
+        /*
+        * Check if the data service has any passed designs from my
+        * designs route
+        */
+        if(data.designListBuffer.length > 0){
+          self.actionsArray = data.designListBuffer;
+
+          // Load the last edit
+
+          self.loadFabricOnJSON(self.actionsArray[self.actionsArray.length - 1]);
+          self.currentActionIndex = self.actionsArray.length - 1;
+
+          // Reset the data.designListBuffer to empty
+          data.designListBuffer = [];
+        }
+
+
       }
 
 

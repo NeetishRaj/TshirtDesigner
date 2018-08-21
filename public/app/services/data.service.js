@@ -48,6 +48,9 @@
         );
     };
 
+    // It will store the fetched design lists
+    data.designListBuffer = [];
+
 
     return data;
   }

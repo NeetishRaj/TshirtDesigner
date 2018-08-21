@@ -9,7 +9,8 @@
 */
 angular.module("designEditorApp").controller("designsController", [
   "data",
-  function(data){
+  "$window",
+  function(data, $window, $state){
 
     var self = this;
     this.myEditsArray = [];
@@ -17,11 +18,18 @@ angular.module("designEditorApp").controller("designsController", [
     this.load = function(){
       data.getDesignList().then(
         function(listData){
-          console.log(listData);
+          /*
+          * @TODO find out why there is double elemnts in data return
+          * everytime
+          */
+          // console.log(listData);
           self.myEditsArray = listData[0];
         }
       );
+    }
 
+    this.goToEditor = function(index){
+      data.designListBuffer = $window.JSON.parse(self.myEditsArray[index].edits);
     }
   }
 ])

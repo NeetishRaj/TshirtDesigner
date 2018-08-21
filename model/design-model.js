@@ -1,5 +1,6 @@
 const config = require('../config.js');
 const Sequelize = require('sequelize');
+const pg = require('pg');
 
 /*
  * Uri string based connection is deprecated in Sequelize for security reasons
@@ -8,7 +9,7 @@ const Sequelize = require('sequelize');
  */
 
 
-/*const sequelize = new Sequelize(
+const sequelize = new Sequelize(
   config.db.name,
   config.db.username,
   config.db.password,
@@ -24,10 +25,30 @@ const Sequelize = require('sequelize');
     },
     "port": config.db.port
   }
-);*/
+);
 
-const sequelize = new Sequelize(process.env.DATABASE_URL);
 
+
+/*
+ * If we are using local running app to use remote postgre db then we need to
+ * to set the ssl value to true , to connect in ssl format.
+ */
+if (typeof process.env.DATABASE_URL === "undefined"){
+  pg.defaults.ssl = true;
+}
+
+// const sequelize = new Sequelize(process.env.DATABASE_URL || "postgres://lnjsaeaymhyhnx:d9c4c58001e79c2765dc0ee5637d5b74f1f5261de8b4553e6545c97e0c569819@ec2-79-125-127-60.eu-west-1.compute.amazonaws.com:5432/d62bsnb51k32sv");
+
+sequelize.
+  authenticate().
+  then(() => {
+    console.log('Connection has been established successfully with Heroku Postgre.');
+  }).
+  catch((err) => {
+    console.error('Unable to connect to the database:', err.message);
+  });
+
+console.log("Starting");
 const Design = sequelize.define('design', {
   "edits": {
     "allowNull": true,
@@ -46,7 +67,8 @@ const Design = sequelize.define('design', {
   }
 });
 
-// Design.sync();
+// Create the table
+Design.sync();
 
 
 module.exports.insertDesign = function(designData, callback){
