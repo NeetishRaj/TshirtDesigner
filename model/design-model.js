@@ -9,23 +9,23 @@ const pg = require('pg');
  */
 
 
-const sequelize = new Sequelize(
-  config.db.name,
-  config.db.username,
-  config.db.password,
-  {
-    "dialect": config.db.dialect,
-    "host": config.db.host,
-    "operatorsAliases": false,
-    "pool": {
-      "acquire": 30000,
-      "idle": 10000,
-      "max": 5,
-      "min": 0
-    },
-    "port": config.db.port
-  }
-);
+// const sequelize = new Sequelize(
+//   config.db.name,
+//   config.db.username,
+//   config.db.password,
+//   {
+//     "dialect": config.db.dialect,
+//     "host": config.db.host,
+//     "operatorsAliases": false,
+//     "pool": {
+//       "acquire": 30000,
+//       "idle": 10000,
+//       "max": 5,
+//       "min": 0
+//     },
+//     "port": config.db.port
+//   }
+// );
 
 
 
@@ -37,7 +37,7 @@ if (typeof process.env.DATABASE_URL === "undefined"){
   pg.defaults.ssl = true;
 }
 
-// const sequelize = new Sequelize(process.env.DATABASE_URL || "postgres://lnjsaeaymhyhnx:d9c4c58001e79c2765dc0ee5637d5b74f1f5261de8b4553e6545c97e0c569819@ec2-79-125-127-60.eu-west-1.compute.amazonaws.com:5432/d62bsnb51k32sv");
+const sequelize = new Sequelize(process.env.DATABASE_URL);
 
 sequelize.
   authenticate().
